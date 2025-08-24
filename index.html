@@ -586,15 +586,47 @@
       overflow: hidden;
     }
 
-    .template-preview iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-      transform: scale(0.8);
-      transform-origin: top left;
-      width: 125%;
-      height: 125%;
-    }
+.template-preview iframe {
+  width: 100px !important;
+  height: 120px !important;
+  border: none;
+  transform: none !important;
+  transform-origin: center top;
+  display: block;
+}
+/* ===== Override for preview-frame (make the inner preview large & responsive) ===== */
+body .modal-body .preview-frame,
+body .template-preview .preview-frame,
+.preview-frame,
+.preview-frame > iframe,
+.preview-frame iframe {
+  width: 100% !important;
+  height: 80vh !important;        /* large, viewport-aware height */
+  min-height: 520px !important;   /* roomy minimum for desktop */
+  max-height: 90vh !important;
+  border: none !important;
+  transform: none !important;     /* remove any scaling */
+  display: block !important;
+  overflow: hidden !important;
+}
+
+/* If the preview-frame is inside a modal body, ensure the modal gives it space */
+.modal-body .preview-frame {
+  height: calc(80vh - 40px) !important;
+  min-height: 520px !important;
+}
+
+/* Mobile adjustments */
+@media (max-width: 880px) {
+  .preview-frame,
+  .modal-body .preview-frame {
+    height: 60vh !important;
+    min-height: 340px !important;
+    max-width: calc(100% - 32px) !important;
+  }
+}
+
+
 
     .template-overlay {
       position: absolute;
@@ -971,6 +1003,7 @@
       font-weight: 700;
       margin-bottom: 0.5rem;
     }
+    
 
     .pricing-price {
       font-size: 3rem;
@@ -1441,6 +1474,8 @@
   color: var(--text-muted);
   font-size: 0.9rem;
 }
+
+
   </style>
 </head>
 <body>
@@ -1700,7 +1735,7 @@
             <li>Consultation scheduling</li>
             <li>Client testimonials</li>
           </ul>
-          <div class="template-price">$397</div>
+          <div class="template-price">$5</div>
           <div class="template-actions">
             <button class="btn btn-secondary" style="flex: 1;" onclick="previewTemplate('legal')">
               <i class="fas fa-eye"></i> Preview
@@ -1739,7 +1774,7 @@
             <li>ROI calculators</li>
             <li>Enterprise testimonials</li>
           </ul>
-          <div class="template-price">$297</div>
+          <div class="template-price">$5</div>
           <div class="template-actions">
             <button class="btn btn-secondary" style="flex: 1;" onclick="previewTemplate('consulting')">
               <i class="fas fa-eye"></i> Preview
@@ -1778,7 +1813,7 @@
             <li>Free trial signup flow</li>
             <li>Customer testimonials</li>
           </ul>
-          <div class="template-price">$497</div>
+          <div class="template-price">$5</div>
           <div class="template-actions">
             <button class="btn btn-secondary" style="flex: 1;" onclick="previewTemplate('saas')">
               <i class="fas fa-eye"></i> Preview
@@ -1817,7 +1852,7 @@
             <li>Doctor profiles</li>
             <li>Patient testimonials</li>
           </ul>
-          <div class="template-price">$447</div>
+          <div class="template-price">$5</div>
           <div class="template-actions">
             <button class="btn btn-secondary" style="flex: 1;" onclick="previewTemplate('healthcare')">
               <i class="fas fa-eye"></i> Preview
@@ -1856,7 +1891,7 @@
             <li>Payment gateway integration</li>
             <li>Customer reviews</li>
           </ul>
-          <div class="template-price">$597</div>
+          <div class="template-price">$5</div>
           <div class="template-actions">
             <button class="btn btn-secondary" style="flex: 1;" onclick="previewTemplate('ecommerce')">
               <i class="fas fa-eye"></i> Preview
@@ -1895,7 +1930,7 @@
             <li>Mortgage calculator</li>
             <li>Agent contact forms</li>
           </ul>
-          <div class="template-price">$347</div>
+          <div class="template-price">$5</div>
           <div class="template-actions">
             <button class="btn btn-secondary" style="flex: 1;" onclick="previewTemplate('realestate')">
               <i class="fas fa-eye"></i> Preview
@@ -1936,7 +1971,7 @@
         <div class="pricing-header">
           <h3 class="pricing-title">Professional</h3>
           <!-- keep data-monthly and data-annual as source of truth -->
-          <div class="pricing-price" data-monthly="197" data-annual="158" id="professionalPrice">$197</div>
+          <div class="pricing-price" data-monthly="197" data-annual="158" id="professionalPrice">$5</div>
           <div class="pricing-period" id="professionalPeriod">per month</div>
         </div>
         <div class="pricing-features">
@@ -1960,7 +1995,7 @@
         <div class="pricing-header">
           <h3 class="pricing-title">Enterprise</h3>
           <!-- Enterprise monthly 497 / annual 398 -->
-          <div class="pricing-price" data-monthly="497" data-annual="398" id="enterprisePrice">$497</div>
+          <div class="pricing-price" data-monthly="497" data-annual="398" id="enterprisePrice">$5</div>
           <div class="pricing-period" id="enterprisePeriod">per month</div>
         </div>
         <div class="pricing-features">
@@ -2533,42 +2568,42 @@
       TEMPLATES: {
         consulting: {
           name: 'Executive Consulting',
-          price: 297,
+          price: 0.05,
           category: 'business',
           description: 'Professional consulting template with case studies and testimonials',
           features: ['Lead capture optimization', 'Case study sections', 'ROI calculators', 'Enterprise testimonials']
         },
         saas: {
           name: 'SaaS Launch Pro',
-          price: 497,
+          price: 5,
           category: 'saas',
           description: 'Complete SaaS landing page with pricing tables and feature comparisons',
           features: ['Interactive pricing calculator', 'Feature comparison matrix', 'Free trial signup flow', 'Customer testimonials']
         },
         legal: {
           name: 'Legal Authority',
-          price: 397,
+          price: 5,
           category: 'legal',
           description: 'Professional legal services template with practice areas and attorney profiles',
           features: ['Attorney biography sections', 'Case results showcase', 'Consultation scheduling', 'Client testimonials']
         },
         healthcare: {
           name: 'Medical Practice',
-          price: 447,
+          price: 5,
           category: 'healthcare',
           description: 'HIPAA-compliant healthcare template with appointment booking',
           features: ['Online appointment booking', 'Service descriptions', 'Doctor profiles', 'Patient testimonials']
         },
         ecommerce: {
           name: 'Premium Store',
-          price: 597,
+          price: 5,
           category: 'ecommerce',
           description: 'High-converting e-commerce template with shopping cart integration',
           features: ['Product catalog system', 'Shopping cart functionality', 'Payment gateway integration', 'Customer reviews']
         },
         realestate: {
           name: 'Property Showcase',
-          price: 347,
+          price: 5,
           category: 'realestate',
           description: 'Professional real estate template with property listings',
           features: ['Property search functionality', 'Virtual tour integration', 'Mortgage calculator', 'Agent contact forms']
@@ -2965,87 +3000,670 @@
       return `<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Strategic Consulting Excellence</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; }
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-    header { background: linear-gradient(135deg, #1e40af, #3b82f6); color: white; text-align: center; padding: 80px 0; }
-    h1 { font-size: 3.5rem; margin-bottom: 20px; font-weight: 700; }
-    .subtitle { font-size: 1.4rem; margin-bottom: 40px; opacity: 0.9; }
-    .cta-btn { background: #dc2626; color: white; padding: 18px 36px; text-decoration: none; border-radius: 10px; font-weight: 700; font-size: 1.2rem; display: inline-block; transition: all 0.3s; box-shadow: 0 10px 30px rgba(220, 38, 38, 0.3); }
-    .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 15px 40px rgba(220, 38, 38, 0.4); }
-    .services { padding: 100px 0; background: #f8fafc; }
-    .services h2 { text-align: center; font-size: 2.8rem; margin-bottom: 60px; color: #1e40af; }
-    .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; }
-    .service-card { background: white; padding: 40px; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.1); text-align: center; transition: transform 0.3s; }
-    .service-card:hover { transform: translateY(-10px); }
-    .service-icon { width: 80px; height: 80px; background: #1e40af; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 30px; color: white; font-size: 2rem; }
-    .service-card h3 { color: #1e40af; margin-bottom: 20px; font-size: 1.5rem; }
-    .stats { padding: 80px 0; background: #1e40af; color: white; text-align: center; }
-    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 40px; }
-    .stat-number { font-size: 3.5rem; font-weight: 800; color: #fbbf24; margin-bottom: 10px; }
-    .testimonial { background: rgba(255,255,255,0.1); padding: 40px; border-radius: 15px; margin: 20px; font-style: italic; font-size: 1.2rem; }
-    .testimonial-author { margin-top: 20px; font-weight: 600; color: #fbbf24; }
-    .footer { background: #1f2937; color: white; text-align: center; padding: 60px 0; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Consulting</title>
+    <style>
+        html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1; /* grows to fill space above footer */
+}
+
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: #000000;
+            overflow-x: hidden;
+        }
+
+        /* Custom cursor */
+       
+
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+            
+        }
+
+        /* Animated Background with 3D effect */
+        .bg-3d {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background:
+                radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 50%, rgba(255, 140, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(218, 165, 32, 0.1) 0%, transparent 50%),
+                linear-gradient(135deg, #000000, #1a1a1a, #000000);
+            animation: morphBackground 20s ease-in-out infinite;
+        }
+
+        @keyframes morphBackground {
+            0%, 100% { filter: hue-rotate(0deg) brightness(1); }
+            25% { filter: hue-rotate(90deg) brightness(1.2); }
+            50% { filter: hue-rotate(180deg) brightness(0.8); }
+            75% { filter: hue-rotate(270deg) brightness(1.1); }
+        }
+
+        /* Luxury particles */
+        .luxury-particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            border-radius: 50%;
+            opacity: 0.9;
+            animation: luxuryFloat 25s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+        }
+
+        @keyframes luxuryFloat {
+            0%, 100% {
+                transform: translateY(100vh) translateX(0px) rotate(0deg) scale(0.5);
+                opacity: 0;
+            }
+            10%, 90% {
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-20vh) translateX(100px) rotate(180deg) scale(1.2);
+                opacity: 1;
+            }
+        }
+
+        /* Header */
+        header {
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(20px);
+            color: #ffd700;
+            padding: 1.5rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #daa520);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes logoGlow {
+            from { filter: brightness(1) drop-shadow(0 0 20px rgba(255, 215, 0, 0.5)); }
+            to { filter: brightness(1.3) drop-shadow(0 0 40px rgba(255, 215, 0, 0.9)); }
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 3rem;
+        }
+
+        .nav-links a {
+            color: #ffd700;
+            text-decoration: none;
+            transition: all 0.4s;
+            position: relative;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            background: linear-gradient(45deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+            border-radius: 10px;
+            opacity: 0;
+            transition: all 0.4s;
+            z-index: -1;
+        }
+
+        .nav-links a:hover::before {
+            opacity: 1;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: transparent;
+            color: #ffffff;
+            padding: 200px 0 150px;
+            text-align: center;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background:
+                radial-gradient(ellipse at center top, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at center bottom, rgba(255, 140, 0, 0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #ffffff, #daa520);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: heroGlow 4s ease-in-out infinite alternate;
+            text-shadow: 0 0 60px rgba(255, 215, 0, 0.6);
+            letter-spacing: 2px;
+            font-weight: 900;
+        }
+
+        @keyframes heroGlow {
+            from {
+                filter: brightness(1) drop-shadow(0 0 30px rgba(255, 215, 0, 0.6));
+                transform: scale(1);
+            }
+            to {
+                filter: brightness(1.4) drop-shadow(0 0 60px rgba(255, 215, 0, 1));
+                transform: scale(1.02);
+            }
+        }
+
+        .hero p {
+            font-size: 1.6rem;
+            margin-bottom: 3rem;
+            opacity: 0.95;
+            animation: fadeInUp 1.5s ease-out 0.3s both;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #daa520);
+            color: #000000;
+            padding: 25px 60px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.4s;
+            animation: fadeInUp 1.5s ease-out 0.6s both;
+            box-shadow:
+                0 15px 50px rgba(255, 215, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.3);
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+            transition: left 0.8s;
+        }
+
+        .cta-button:hover::before {
+            left: 100%;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow:
+                0 25px 70px rgba(255, 215, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 150px 0;
+            background:
+                linear-gradient(135deg, transparent 0%, rgba(255, 215, 0, 0.05) 50%, transparent 100%),
+                rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 4rem;
+            margin-bottom: 4rem;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 0 40px rgba(255, 215, 0, 0.5);
+            font-weight: 900;
+            letter-spacing: 2px;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 4rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background:
+                linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 140, 0, 0.05) 100%),
+                rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            border: 2px solid rgba(255, 215, 0, 0.3);
+            border-radius: 30px;
+            padding: 4rem;
+            text-align: center;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(255, 215, 0, 0.2);
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(255, 215, 0, 0.1),
+                rgba(255, 140, 0, 0.1),
+                transparent
+            );
+            animation: luxuryRotate 15s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes luxuryRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .feature-card:hover {
+            transform: translateY(-20px) scale(1.05);
+            border-color: rgba(255, 215, 0, 0.8);
+            box-shadow:
+                0 40px 100px rgba(255, 215, 0, 0.4),
+                0 0 100px rgba(255, 215, 0, 0.2);
+        }
+
+        .feature-icon {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(45deg, #ffd700, #ff8c00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            color: #000000;
+            font-size: 3rem;
+            position: relative;
+            z-index: 2;
+            animation: iconFloat 6s ease-in-out infinite;
+            box-shadow:
+                0 0 50px rgba(255, 215, 0, 0.8),
+                inset 0 2px 10px rgba(255, 255, 255, 0.3);
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-10px) rotate(90deg); }
+            50% { transform: translateY(0px) rotate(180deg); }
+            75% { transform: translateY(-10px) rotate(270deg); }
+        }
+
+        .feature-card h3 {
+            margin-bottom: 2rem;
+            color: #ffd700;
+            font-size: 2rem;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+            font-weight: bold;
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 2;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Pricing Section */
+        .pricing {
+            padding: 150px 0;
+            background: transparent;
+            position: relative;
+        }
+
+        .pricing::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+        }
+
+        .pricing-card {
+            background:
+                linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(0, 0, 0, 0.9) 50%, rgba(255, 140, 0, 0.15) 100%);
+            backdrop-filter: blur(25px);
+            border: 3px solid rgba(255, 215, 0, 0.5);
+            border-radius: 40px;
+            padding: 5rem;
+            text-align: center;
+            box-shadow:
+                0 30px 100px rgba(255, 215, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+            transition: all 0.5s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: conic-gradient(
+                from 0deg,
+                transparent,
+                rgba(255, 215, 0, 0.2),
+                rgba(255, 140, 0, 0.1),
+                rgba(218, 165, 32, 0.1),
+                transparent
+            );
+            animation: prestigeRotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes prestigeRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow:
+                0 50px 150px rgba(255, 215, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 215, 0, 0.8);
+        }
+
+        .price {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ffd700, #ff8c00, #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 60px rgba(255, 215, 0, 0.8);
+            animation: priceGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes priceGlow {
+            from { filter: brightness(1) drop-shadow(0 0 30px rgba(255, 215, 0, 0.6)); }
+            to { filter: brightness(1.3) drop-shadow(0 0 50px rgba(255, 215, 0, 1)); }
+        }
+
+        .price-period {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.4rem;
+            font-weight: normal;
+        }
+
+        .features-list {
+            list-style: none;
+            margin: 4rem 0;
+            text-align: left;
+            columns: 2;
+            column-gap: 3rem;
+        }
+
+        .features-list li {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid rgba(255, 215, 0, 0.3);
+            position: relative;
+            padding-left: 3.5rem;
+            color: #ffffff;
+            transition: all 0.4s;
+            break-inside: avoid;
+            font-size: 1.1rem;
+        }
+
+        .features-list li:hover {
+            color: #ffd700;
+            transform: translateX(15px);
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+        }
+
+        .features-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #ffd700;
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 0 0 15px rgba(255, 215, 0, 0.8);
+        }
+
+        /* Footer */
+        footer {
+            background:
+                linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(0, 0, 0, 0.95) 50%, rgba(255, 140, 0, 0.1) 100%);
+            color: #ffd700;
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 2px solid rgba(255, 215, 0, 0.5);
+            backdrop-filter: blur(20px);
+              margin-top: auto; /* ensures footer is the last thing, no extra space below */
+
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .features-list {
+                columns: 1;
+            }
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Strategic Consulting Excellence</h1>
-      <p class="subtitle">Transform your business with data-driven insights and proven methodologies</p>
-      <a href="#contact" class="cta-btn">Schedule Strategic Consultation</a>
-    </div>
-  </header>
-  
-  <section class="services">
-    <div class="container">
-      <h2>Our Expertise</h2>
-      <div class="services-grid">
-        <div class="service-card">
-          <div class="service-icon">📊</div>
-          <h3>Strategic Planning</h3>
-          <p>Comprehensive business strategy development with actionable roadmaps and measurable outcomes for sustainable growth.</p>
+    <div class="cursor"></div>
+    <div class="bg-3d"></div>
+    
+    <header>
+        <nav class="container">
+            <div class="logo">Executive Consulting</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" id="home">
+            <div class="container">
+                <div class="hero-content">
+                    <h1>Executive Consulting</h1>
+                    <p>The ultimate enterprise solution for industry leaders. Unlimited capabilities, white-glove service, and exclusive features that redefine what's possible.</p>
+                    <a href="#pricing" class="cta-button">Experience Prestige</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="features" id="features">
+            <div class="container">
+                <h2 class="section-title">Exclusive Features</h2>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>Quantum Analytics</h3>
+                        <p>Revolutionary AI-powered insights with quantum computing capabilities, real-time market analysis, and predictive modeling that's years ahead of the competition.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👑</div>
+                        <h3>Concierge Support</h3>
+                        <p>Dedicated 24/7 white-glove support team with C-level executives, instant response guarantee, and on-site technical specialists.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🛡️</div>
+                        <h3>Military-Grade Security</h3>
+                        <p>Bank-level encryption, biometric authentication, air-gapped infrastructure, and government-certified security protocols.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>Neural AI Engine</h3>
+                        <p>Self-learning artificial intelligence that adapts to your business patterns, automates complex decisions, and optimizes performance continuously.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🌐</div>
+                        <h3>Global Infrastructure</h3>
+                        <p>Private cloud network across 50+ countries, edge computing capabilities, and guaranteed 99.99% uptime with instant failover.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">⚡</div>
+                        <h3>Unlimited Everything</h3>
+                        <p>No limits on users, storage, integrations, or API calls. Custom development, private beta features, and exclusive access to new technologies.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing" id="pricing">
+            <div class="container">
+                <h2 class="section-title">Prestige Pricing</h2>
+                <div class="pricing-card">
+                    <div class="price">$499<span class="price-period">/month</span></div>
+                    <h3>Prestige Elite</h3>
+                    <ul class="features-list">
+                        <li>Unlimited team members</li>
+                        <li>Unlimited cloud storage</li>
+                        <li>Quantum AI analytics</li>
+                        <li>24/7 concierge support</li>
+                        <li>All mobile & desktop apps</li>
+                        <li>Military-grade security</li>
+                        <li>Unlimited integrations</li>
+                        <li>Custom AI workflows</li>
+                        <li>Full API access</li>
+                        <li>Dedicated success team</li>
+                        <li>Private cloud infrastructure</li>
+                        <li>Custom development</li>
+                        <li>Executive briefings</li>
+                        <li>Priority feature development</li>
+                        <li>White-label solutions</li>
+                        <li>Global compliance</li>
+                        <li>Disaster recovery</li>
+                        <li>Performance guarantees</li>
+                        <li>Exclusive beta access</li>
+                        <li>On-site training</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="display: block; margin-top: 3rem;">Choose Prestige</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Prestige Elite. All rights reserved. | Exclusive. Unlimited. Extraordinary.</p>
         </div>
-        <div class="service-card">
-          <div class="service-icon">⚡</div>
-          <h3>Digital Transformation</h3>
-          <p>Technology integration and process optimization to drive efficiency and competitive advantage in digital markets.</p>
-        </div>
-        <div class="service-card">
-          <div class="service-icon">🎯</div>
-          <h3>Market Analysis</h3>
-          <p>In-depth market research and competitive analysis to inform strategic decisions and identify growth opportunities.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-  <section class="stats">
-    <div class="container">
-      <h2 style="font-size: 2.5rem; margin-bottom: 20px;">Proven Results</h2>
-      <div class="stats-grid">
-        <div><div class="stat-number">250%</div><div>Average ROI Increase</div></div>
-        <div><div class="stat-number">500+</div><div>Successful Projects</div></div>
-        <div><div class="stat-number">98%</div><div>Client Retention</div></div>
-        <div><div class="stat-number">24/7</div><div>Support Available</div></div>
-      </div>
-      <div class="testimonial">
-        "The strategic insights provided completely transformed our market approach. Revenue increased by 300% in just 12 months."
-        <div class="testimonial-author">- CEO, Fortune 500 Technology Company</div>
-      </div>
-    </div>
-  </section>
-  
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2024 Strategic Consulting Excellence. Confidential. Professional. Results-Driven.</p>
-    </div>
-  </footer>
-</body>
+    </footer>
+
+
+
 </html>`;
     }
 
@@ -3967,7 +4585,7 @@ function selectPlan(planType) {
       templates: {
         consulting: {
           name: 'Executive Consulting',
-          price: 297,
+          price: 0.05,
           category: 'business',
           description: 'Professional consulting template with case studies and testimonials',
           features: ['Lead capture optimization', 'Case study sections', 'ROI calculators', 'Enterprise testimonials'],
@@ -3975,7 +4593,7 @@ function selectPlan(planType) {
         },
         saas: {
           name: 'SaaS Launch Pro',
-          price: 497,
+          price: 5,
           category: 'saas',
           description: 'Complete SaaS landing page with pricing tables and feature comparisons',
           features: ['Interactive pricing calculator', 'Feature comparison matrix', 'Free trial signup flow', 'Customer testimonials'],
@@ -3983,7 +4601,7 @@ function selectPlan(planType) {
         },
         legal: {
           name: 'Legal Authority',
-          price: 397,
+          price: 5,
           category: 'legal',
           description: 'Professional legal services template with practice areas and attorney profiles',
           features: ['Attorney biography sections', 'Case results showcase', 'Consultation scheduling', 'Client testimonials'],
@@ -3991,7 +4609,7 @@ function selectPlan(planType) {
         },
         healthcare: {
           name: 'Medical Practice',
-          price: 447,
+          price: 5,
           category: 'healthcare',
           description: 'HIPAA-compliant healthcare template with appointment booking',
           features: ['Online appointment booking', 'Service descriptions', 'Doctor profiles', 'Patient testimonials'],
@@ -3999,7 +4617,7 @@ function selectPlan(planType) {
         },
         ecommerce: {
           name: 'Premium Store',
-          price: 597,
+          price: 5,
           category: 'ecommerce',
           description: 'High-converting e-commerce template with shopping cart integration',
           features: ['Product catalog system', 'Shopping cart functionality', 'Payment gateway integration', 'Customer reviews'],
@@ -4007,7 +4625,7 @@ function selectPlan(planType) {
         },
         realestate: {
           name: 'Property Showcase',
-          price: 347,
+          price: 5,
           category: 'realestate',
           description: 'Professional real estate template with property listings',
           features: ['Property search functionality', 'Virtual tour integration', 'Mortgage calculator', 'Agent contact forms'],
@@ -4019,7 +4637,7 @@ function selectPlan(planType) {
         plans: {
           professional: {
             name: 'Professional Plan',
-            price: 197,
+            price: 5,
             billing: 'one-time',
             features: [
               'Access to all premium templates',
@@ -4032,7 +4650,7 @@ function selectPlan(planType) {
           },
           enterprise: {
             name: 'Enterprise Plan',
-            price: 497,
+            price: 5,
             billing: 'one-time',
             features: [
               'Everything in Professional',
